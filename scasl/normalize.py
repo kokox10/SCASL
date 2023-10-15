@@ -72,7 +72,7 @@ def knn_impute(df_fillna, df_prob, k=5):
         knn[i] = np.argsort(d[i])[1:k+1]
         knn_d[i] = np.sort(d[i])[1:k+1]
     knn = knn.astype(int)
-    knn_d_inv = np.exp(-2 * knn_d / knn_d.std())
+    knn_d_inv = np.exp(-0.5 * knn_d / knn_d.std())
     knn_weights = knn_d_inv / (np.sum(knn_d_inv, axis=1).reshape(m, 1).repeat(k, axis=1))
 
     knn_val = np.zeros((m, n))
